@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CINEPULSE &ndash; Composer Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="composer-styles.css">
+</head>
+<body>
+
+  <!-- Dynamic Custom Cursor Elements -->
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
+
+  <!-- Dynamic Background Canvas & Ambient Overlay -->
+  <canvas id="universe-bg-canvas"></canvas>
+  <div class="universe-bg-glow" id="bg-glow"></div>
+
+  <!-- ─── HEADER / NAVBAR ─── -->
+  <header>
+    <a href="index.html" class="logo">CINE<span id="logo-span">PULSE</span></a>
+    <a href="index.html" class="btn-back-home">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block; transform: scaleX(-1);"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      Exit Universe
+    </a>
+  </header>
+
+  <!-- ─── MAIN PORTAL WRAPPER ─── -->
+  <main class="universe-container">
+    
+    <!-- LEFT PANEL: COMPOSER PROFILE -->
+    <section class="composer-profile-wrapper">
+      <div class="composer-profile-card">
+        <div class="composer-image-box" id="composer-img-box">
+          <img class="composer-profile-img" id="composer-profile-pic" src="posters/aniruth.jpg" alt="Composer Profile">
+        </div>
+        
+        <p class="composer-title-tag" id="composer-title-tag">Dark Synth</p>
+        <h1 class="composer-main-name" id="composer-name">Anirudh Ravichander</h1>
+        <p class="composer-bio" id="composer-bio">Loading the details of the composer's universe...</p>
+        
+        <div class="composer-characteristic-box">
+          <p class="char-label">Signature Feeling</p>
+          <p class="char-value" id="composer-characteristic">Mass Elevation & Synth Fury</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: TRACKLIST SECTION -->
+    <section class="composer-tracklist-column">
+      <div class="tracklist-header">
+        <h2 class="tracklist-title">Universe <span id="tracklist-title-span">Soundtracks</span></h2>
+        <span class="track-count" id="tracklist-count">0 masterworks available</span>
+      </div>
+      
+      <div class="tracks-grid" id="tracks-container">
+        <!-- Injected dynamically via JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── BOTTOM DYNAMIC PLAYER BAR (Spotify-Style) ─── -->
+  <div id="mini-player">
+    
+    <!-- Row 1: Track Details + Play/Pause Action -->
+    <div class="player-row-info">
+      <div class="player-info">
+        <div class="player-title" id="player-title">Select a track</div>
+        <div class="player-sub" id="player-sub">to enter playback</div>
+      </div>
+      
+      <div class="p-play-compact" id="p-play-compact" aria-label="Quick Play">
+        <div class="play-tri-compact"></div>
+      </div>
+      <button class="p-like" id="p-like" aria-label="Like Track">&#9825;</button>
+    </div>
+
+    <!-- Row 2: Interactive progress bar and time stamps -->
+    <div class="player-row-progress">
+      <span class="player-time" id="player-time-current">0:00</span>
+      <div class="player-progress" id="player-progress">
+        <div class="player-bar" id="player-bar"></div>
+      </div>
+      <span class="player-time" id="player-time-total">0:00</span>
+    </div>
+
+    <!-- Row 3: Standard controls (shuffle, prev, play/pause, next, repeat) -->
+    <div class="player-row-controls">
+      <button class="p-ctrl-btn p-shuffle" id="p-shuffle" aria-label="Shuffle">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+      </button>
+      <button class="p-ctrl-btn p-prev" id="p-prev" aria-label="Previous track">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+      </button>
+      <div class="p-play" id="p-play" aria-label="Play / Pause">
+        <div class="play-tri"></div>
+        <div class="pause-lines"></div>
+      </div>
+      <button class="p-ctrl-btn p-next" id="p-next" aria-label="Next track">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zm-10 6l8.5 6V6z" transform="scale(-1,1) translate(-24,0)"/></svg>
+      </button>
+      <button class="p-ctrl-btn p-repeat" id="p-repeat" aria-label="Repeat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      </button>
+    </div>
+
+    <!-- Hidden linear progress bar when collapsed -->
+    <div class="player-compact-progress">
+      <div class="player-bar-compact" id="player-bar-compact"></div>
+    </div>
+
+    <!-- Core Audio element -->
+    <audio id="universe-audio" preload="metadata" playsinline></audio>
+  </div>
+
+  <script src="composer-app.js"></script>
+</body>
+</html>

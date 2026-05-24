@@ -1,0 +1,9 @@
+# Ignore large media folders
+audio/
+visuals/
+
+# System files
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
